@@ -21,9 +21,8 @@ for filename in archivos_clientes:
     print('filename: ' + filename)
     client_file = pd.read_csv(
         INPUT_DATA_PATH + filename + '.' + INPUT_EXTENSION,
-        sep='||',
-        encoding='latin-1'
-    )
+        sep='\|\|',
+        encoding='latin-1')
     print(client_file.shape)
     client_file.to_hdf(OUTPUT_DATA_PATH + filename + "." + OUT_EXTENSION,
                  key='df',
