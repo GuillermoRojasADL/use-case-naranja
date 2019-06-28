@@ -6,24 +6,31 @@ from datetime import timedelta
 # folders names definitions
 client_input_data_folder = '/mnt/s3-refined-porvenir/Clientes/h5/'
 # files names definitions
-client_input_data = ["sbgr1_ps_aa_rd_person.h5",
-                     "sbgr1_ps_bc.h5",
-                     "sbgr1_ps_por_habdata_tbl.h5",
-                     "sbgr1_ps_por_inf_com_tbl.h5",
-                     "sbgr1_ps_por_salotr_tbl.h5",
-                     "sbgr1_ps_rd_person.h5"]
+client_input_data = \
+    ['sbgr1_ps_aa_rd_person',
+     'sbgr1_ps_bc',
+     'sbgr1_ps_por_habdata_tbl',
+     'sbgr1_ps_por_salotr_tbl',
+     'sbgr1_ps_por_inf_com_tbl',
+     'sbgr1_ps_rd_person',
+     'sbgr1_ps_bo_role',
+     'sbgr1_ps_bo_cm',
+     'sbgr1_ps_cm']
 ########################
 client_df =\
-    pd.read_hdf(client_input_data_folder+client_input_data[0], 'df')
+    pd.read_hdf(client_input_data_folder+client_input_data[0]+'.h5', 'df')
 print(client_df.shape)
 for filename in client_input_data[1:]:
     data =\
-        pd.read_hdf(client_input_data_folder+filename, 'df')
+        pd.read_hdf(client_input_data_folder+filename+'.h5', 'df')
     print(data.shape)
-    client_df = pd.merge(client_df, data, how='inner',
+    client_df = pd.merge(client_df, data, how='left',
                        left_on=['BO_ID'],
                        right_on=['BO_ID'])
     print(client_df.shape)
+client_df.to_hdf(client_input_data_folder + "client_dataset.h5",
+                 key='df',
+                 mode='w')
 ########################
 # data =\
 #     pd.read_hdf(client_input_data_folder+client_input_data[2], 'df')
