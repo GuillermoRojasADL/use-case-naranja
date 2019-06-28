@@ -15,15 +15,16 @@ client_input_data = ["sbgr1_ps_aa_rd_person.h5",
 ########################
 client_df =\
     pd.read_hdf(client_input_data_folder+client_input_data[0], 'df')
-data =\
-    pd.read_hdf(client_input_data_folder+client_input_data[1], 'df')
 print(client_df.shape)
-print(data.shape)
-client_df = pd.merge(client_df, data, how='inner',
-                   left_on=['BO_ID'],
-                   right_on=['BO_ID'])
-print(client_df.shape)
-
+for filename in client_input_data[1:]:
+    data =\
+        pd.read_hdf(client_input_data_folder+filename, 'df')
+    print(data.shape)
+    client_df = pd.merge(client_df, data, how='inner',
+                       left_on=['BO_ID'],
+                       right_on=['BO_ID'])
+    print(client_df.shape)
+########################
 # data =\
 #     pd.read_hdf(client_input_data_folder+client_input_data[2], 'df')
 
