@@ -26,8 +26,9 @@ filename = archivos_clientes[0]
 print('filename: ' + filename)
 client_file = pd.read_csv(
     INPUT_DATA_PATH + filename + '.' + INPUT_EXTENSION,
-    sep='\|\|',
-    encoding='latin-1')
+    sep='\|\|')
+    # ,
+    # encoding='latin-1')
 
 for filename in archivos_clientes:
     print('filename: ' + filename)
