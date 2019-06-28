@@ -28,3 +28,5 @@ for filename in archivos_clientes:
                  key='df',
                  mode='w')
 
+
+# data_cupo_vigente_raw = pd.read_hdf('/home/pandrade/use-case-azul/03-Data/data_cupo_vigente_raw.h5', 'df')
