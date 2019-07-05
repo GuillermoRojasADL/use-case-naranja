@@ -27,6 +27,7 @@ all_clients.drop(columns = ['key'], inplace = True)
 print(client_input_data[1])
 sbgr1_ps_bc =\
      pd.read_hdf(client_input_data_folder + client_input_data[1] + '.h5', 'df')
+sbgr1_ps_bc.groupby('BO_ID')
 all_clients = pd.merge(all_clients, sbgr1_ps_bc, how='left',
                      left_on=['BO_ID'],
                      right_on=['BO_ID'])
