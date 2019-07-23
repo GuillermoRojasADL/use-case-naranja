@@ -1,0 +1,251 @@
+import pandas as pd
+import numpy as np
+from datetime import datetime
+from datetime import timedelta
+
+import sys
+
+import os
+pd.options.mode.chained_assignment = None  # Disable annoying pandas warning
+if not sys.warnoptions:
+    import warnings
+    warnings.simplefilter("ignore")
+
+    # files names definitions
+# folders names definitions
+
+
+
+###################
+# transform text files to h5 files
+archivos_interacciones = [
+        "sbgr_03_05_interacciones",
+        "sbgr_03_106_interacciones",
+        "sbgr_03_110_interacciones",
+        "sbgr_03_14_interacciones",
+        "sbgr_03_01_interacciones",
+        "sbgr_03_06_interacciones",
+        "sbgr_03_107_interacciones",
+        "sbgr_03_111_interacciones",
+        "sbgr_03_15_interacciones",
+        "sbgr_03_02_interacciones",
+        "sbgr_03_07_interacciones",
+        "sbgr_03_108_interacciones",
+        "sbgr_03_112_interacciones",
+        "sbgr_03_16_interacciones",
+        "sbgr_03_03_interacciones",
+        "sbgr_03_08_interacciones",
+        "sbgr_03_109_interacciones",
+        "sbgr_03_11_interacciones",
+        "sbgr_03_17_interacciones",
+        "sbgr_03_04_interacciones",
+        "sbgr_03_09_interacciones",
+        "sbgr_03_10_interacciones",
+        "sbgr_03_13_interacciones"
+    ]
+
+INPUT_EXTENSION = ''
+
+########################
+import pandas as pd
+import numpy as np
+import unidecode
+import re
+import datetime
+
+li = []
+for file in archivos_interacciones:
+    df1 = pd.read_csv(INPUT_DATA_PATH + file + INPUT_EXTENSION, sep='"\|\|"', encoding='latin1')
+    print(" ---{indice}: Archivo: {fname} ----- \n Número de filas: {a}, Número de columnas: {b}".format(indice=len(li) ,fname= file,a=df1.shape[0], b=df1.shape[1]))
+    df = df1.drop_duplicates()
+    df['DATE'] = df['Fecha'].astype(str).str[0:7]
+    shape1, shape2 = (df1.shape, df.shape)
+    print("""Número de registros en archivo: {a} \n 
+            Número de registros sin duplicados: {b} \n
+            registros eliminados {c} \n
+            ------------------------- \n""".format(a=shape1[0], b=shape2[0], c=int(shape1[0]-shape2[0])))
+    li.append(df)
+
+client_df= pd.concat(li, axis=0, ignore_index=True)
+
+client_df=data
+
+print(data.shape)
+
+print(data.columns)
+
+#['"Interaccion', 'Subinteraccion', 'Producto', 'Descripcion_Producto',
+#      #'Categoria', 'Descripcion_Categoria', 'Asunto', 'Descripcion_Asunto',
+#       'Motivo', 'Tipo_Subinter', 'Usuario', 'Centro_Costo', 'Fecha', 'Hora',
+#       'Canales', 'Segmento', 'Numero_ID', 'Rol_Emp_PJ', 'Rol_Emp_PN',
+#       'Observaciones', 'Area', 'Regional', 'Canal', 'PN', 'PJ', 'CC_Usuario"',
+#       'DATE']
+#
+#
+print(len(data['Numero_ID'].unique()))
+print(len(data['Numero_ID']))
+print(data['Numero_ID'].isna().sum())
+print(data['Numero_ID'].isna().sum())
+print(data['DANE_NACIMIENTO'].isna().sum())
+###############
+data =\
+    pd.read_hdf(client_input_data_folder+client_input_data[1]+'.h5', 'df')
+print(data.shape)
+print(data.groupby('SEGMENTO').count())
+
+
+print(data.columns)
+print(len(data['Numero_ID'].unique()))
+print(data['Numero_ID'].duplicated().sum())
+
+print(data['Numero_ID'].unique().sum())
+
+
+print(data['BO_ID'].isna().sum())
+
+print(data.columns)
+print(len(data['SEGMENTO'].unique()))
+print(data['SEGMENTO'].duplicated().sum())
+print(data['SEGMENTO'].isna().sum())
+
+###############
+data =\
+    pd.read_hdf(client_input_data_folder+client_input_data[2]+'.h5', 'df')
+print(data.shape)
+
+print(data.columns)
+print(len(data['BO_ID'].unique()))
+print(data['BO_ID'].duplicated().sum())
+print(data['BO_ID'].isna().sum())
+
+print(len(data['AUDIT_STAMP'].unique()))
+print(data['AUDIT_STAMP'].duplicated().sum())
+print(data['AUDIT_STAMP'].isna().sum())
+
+data['DATE'] =\
+    pd.to_datetime(data['AUDIT_STAMP'].str[0:9].astype(str), format = '%d-%b-%y', errors='coerce')
+print(data['DATE'].min())
+print(data['DATE'].max())
+
+print(data.columns)
+print(len(data['POR_HABEASDATA_FLG'].unique()))
+print(data['POR_HABEASDATA_FLG'].duplicated().sum())
+print(data['POR_HABEASDATA_FLG'].isna().sum())
+
+###############
+data =\
+    pd.read_hdf(client_input_data_folder+client_input_data[3]+'.h5', 'df')
+print(data.shape)
+print(data.columns)
+
+print(len(data['BO_ID'].unique()))
+print(data['BO_ID'].duplicated().sum())
+print(data['BO_ID'].isna().sum())
+
+print(len(data['EFFDT'].unique()))
+print(data['EFFDT'].duplicated().sum())
+print(data['EFFDT'].isna().sum())
+
+print(len(data['AA_CODPROFESSION'].unique()))
+print(data['AA_CODPROFESSION'].duplicated().sum())
+print(data['AA_CODPROFESSION'].isna().sum())
+
+print(len(data['DESCR100_1'].unique()))
+print(data['DESCR100_1'].duplicated().sum())
+print(data['DESCR100_1'].isna().sum())
+
+###############
+data =\
+    pd.read_hdf(client_input_data_folder+client_input_data[4]+'.h5', 'df')
+print(data.shape)
+print(data.columns)
+
+print(len(data['BO_ID'].unique()))
+print(data['BO_ID'].duplicated().sum())
+print(data['BO_ID'].isna().sum())
+
+print(len(data['FECHA_NACIMIENTO'].unique()))
+print(data['FECHA_NACIMIENTO'].dropna().duplicated().sum())
+print(data['FECHA_NACIMIENTO'].isna().sum())
+
+print(len(data['GENERO'].unique()))
+print(data['GENERO'].dropna().duplicated().sum())
+print(data['GENERO'].isna().sum())
+
+data['DATE'] =\
+    pd.to_datetime(data['FECHA_NACIMIENTO'], format = '%Y-%m-%d', errors='coerce')
+
+print(pd.to_datetime(data['FECHA_NACIMIENTO'], format = '%Y-%m-%d', errors='coerce').min())
+print(pd.to_datetime(data['FECHA_NACIMIENTO'], format = '%Y-%m-%d', errors='coerce').max())
+###############
+data =\
+    pd.read_hdf(client_input_data_folder+client_input_data[5]+'.h5', 'df')
+print(data.shape)
+print(data.columns)
+
+print(len(data['BO_ID'].unique()))
+print(data['BO_ID'].duplicated().sum())
+print(data['BO_ID'].isna().sum())
+
+print(len(data['FECHA_NACIMIENTO'].unique()))
+print(data['FECHA_NACIMIENTO'].dropna().duplicated().sum())
+print(data['FECHA_NACIMIENTO'].isna().sum())
+
+print(len(data['GENERO'].unique()))
+print(data['GENERO'].dropna().duplicated().sum())
+print(data['GENERO'].isna().sum())
+
+###############
+data =\
+    pd.read_hdf(client_input_data_folder+client_input_data[6]+'.h5', 'df')
+print(client_input_data[6])
+print(data.shape)
+print(data.columns)
+
+print(len(data['BO_ID'].unique()))
+print(data['BO_ID'].dropna().duplicated().sum())
+print(data['BO_ID'].isna().sum())
+
+print(len(data['TIPO_CLIENTE'].unique()))
+print(data['TIPO_CLIENTE'].dropna().duplicated().sum())
+print(data['TIPO_CLIENTE'].isna().sum())
+
+print(len(data['FECHA_REGISTRO'].unique()))
+print(data['FECHA_REGISTRO'].dropna().duplicated().sum())
+print(data['FECHA_REGISTRO'].isna().sum())
+
+print(data['FECHA_REGISTRO'].min())
+print(data['FECHA_REGISTRO'].max())
+
+###############
+data =\
+    pd.read_csv('/mnt/s3-refined-porvenir/Clientes/sbgr1_ps_cm.txt',
+                sep = '\|\|',
+                encoding = 'utf-8')
+print(data.shape)
+print(data.columns)
+
+
+print(len(data['CM_ID'].unique()))
+print(data['CM_ID'].dropna().duplicated().sum())
+print(data['CM_ID'].isna().sum())
+
+print(len(data['CITY'].unique()))
+print(data['CITY'].dropna().duplicated().sum())
+print(data['CITY'].isna().sum())
+
+x = data[ ['CITY' , 'CM_ID']].groupby('CITY').count()
+pd.DataFrame(x).to_csv('/mnt/s3-refined-porvenir/Clientes/CITY.csv', sep=';')
+#####
+for filename in client_input_data[1:]:
+    data =\
+        pd.read_hdf(client_input_data_folder+filename+'.h5', 'df')
+    print(data.shape)
+    data = pd.merge(data, data, how='left',
+                       left_on=['BO_ID'],
+                       right_on=['BO_ID'])
+    print(data.shape)
+data.to_hdf(client_input_data_folder + "client_dataset.h5",
+                 key='df',
+                 mode='w')
+########################
