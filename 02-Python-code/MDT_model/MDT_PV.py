@@ -25,7 +25,6 @@ year_month.columns = ['YearMonth']
 
 with open(INPUT_DATA_PATH + FILE_NAME + INPUT_EXTENSION, 'rb') as input:
     dataset = pickle.load(file=input)
-
 #Archivo de cesantias
 file = 'cesantias_preMDT.snappy.parquet'
 ces = pd.read_parquet(os.path.join(CES_PV_PREF_PATH,file))

@@ -1,11 +1,25 @@
 import os
-
 import pandas as pd
 
 #########################################################
-
+input_path = '/mnt/work/datasets/SG5_partitions//'
 input_extension = '.snappy.parquet'
 output_path = '/mnt/work/datasets/preMDT_cesantias_pi_def//'
+
+file = 'sbgr5_cta_cuenta'
+cta_cuenta = pd.read_parquet(os.path.join(input_path, file))
+
+# Fecha de activación , ID para clientes activos.
+cta_cuenta['ESTADO_CUENTA_ID'].value_counts()
+sel_cols = ['CUENTA_ID_HASH','IDENTIFICADOR_HASH','FECHA_ACTIVACION','FECHA_INACTIVACION']
+cond = (cta_cuenta['ESTADO_CUENTA_ID']=='ACTIVA')
+df = cta_cuenta[cond][sel_cols]
+
+df.to_parquet(os.path.join(output_path, 'cesantias_preMDT' + '.snappy.parquet'), compression='snappy')
+
+
+#### PI pre MDT
+
 
 # cuenta: sbgr6_fo_cuentas.txt
 file = 'sbgr6_fo_cuentas.txt'
